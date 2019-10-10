@@ -1,5 +1,7 @@
 import React from "react";
 import AdditionalFeature from "./AdditionalFeature";
+
+
 import { connect } from "react-redux";
 
 export const AdditionalFeatures = props => {
@@ -21,5 +23,5 @@ export const AdditionalFeatures = props => {
 
 export default connect(
   state => state,
-  {}
+ {},
 )(AdditionalFeatures);

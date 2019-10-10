@@ -1,3 +1,5 @@
+import * as types from "./actionTypes";
+
 const initialCarState = {
   price: 26395,
   name: "2019 Ford Mustang",
@@ -8,6 +10,19 @@ const initialCarState = {
 
 export function carReducer(state = initialCarState, action) {
   switch (action.type) {
+    case types.ADD_ITEM:
+      return {
+        ...state,
+        // features: state.features.concat(action.payload),
+        features: [...state.features, action.payload.feature]
+      };
+    case types.REMOVE_ITEM:
+      return {
+        ...state,
+        features: state.features.filter(
+          feature => feature.id !== action.payload.feature.id
+        )
+      };
     default:
       return state;
   }
@@ -17,6 +32,10 @@ const initialAdditionalPrice = 0;
 
 export function additionalPriceReducer(state = initialAdditionalPrice, action) {
   switch (action.type) {
+    case types.ADD_ITEM:
+      return (state += action.payload.feature.price);
+    case types.REMOVE_ITEM:
+      return (state -= action.payload.feature.price);
     default:
       return state;
   }
